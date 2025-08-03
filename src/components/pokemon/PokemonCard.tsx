@@ -8,6 +8,7 @@ type Props = {
 };
 
 const PokemonCard: React.FC<Props> = ({ name, imageUrl, id  }) => {
+  const formattedId = `#${String(id).padStart(3, "0")}`;
   return (
     <Link
       to={`/pokemon/${id}`}
@@ -17,6 +18,7 @@ const PokemonCard: React.FC<Props> = ({ name, imageUrl, id  }) => {
         <img src={imageUrl} alt={name} className="w-30 h-30 mx-auto mb-2 rounded-full" />
       </div>
       <h2 className="capitalize font-semibold">{name}</h2>
+      <p className="text-sm text-gray-500">{formattedId}</p>
     </Link>
   );
 };
