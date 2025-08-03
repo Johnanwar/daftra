@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { PaginationView } from './PaginationView';
-import { LoadMoreView } from './LoadMoreView';
+import { lazy, useState } from 'react';
+const PaginationView = lazy(() => import('./PaginationView').then(module => ({ default: module.PaginationView })) );
+const LoadMoreView = lazy(() => import('./LoadMoreView').then(module => ({ default: module.LoadMoreView })) );
 
 const Browser = () => {
   const [mode, setMode] = useState<'pagination' | 'loadmore'>('pagination');
