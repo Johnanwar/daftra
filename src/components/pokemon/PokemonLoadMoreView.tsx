@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { usePokemonPage } from "../api/pokemon";
+import { usePokemonPage } from "../../api/pokemon";
 import PokemonCard from "./PokemonCard";
 
 export default function LoadMoreView() {

@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { usePokemonDetails } from "../api/pokemon";
-import { PokemonSeats } from "../components/PokemonSeats";
+import { PokemonSeats } from "../components/pokemon/PokemonSeats";
 
 
 

@@ -1,8 +1,8 @@
 import {  lazy, useState } from "react";
 import { ErrorBoundary } from "../components/ErrorBoundary";
 
-const PaginationView = lazy(() => import('../components/PokemonPaginationView'));
-const LoadMoreView = lazy(() => import('../components/PokemonLoadMoreView'));
+const PaginationView = lazy(() => import('../components/pokemon/PokemonPaginationView'));
+const LoadMoreView = lazy(() => import('../components/pokemon/PokemonLoadMoreView'));
  
     
 
