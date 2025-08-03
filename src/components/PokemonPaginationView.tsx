@@ -1,14 +1,13 @@
-// ✅ Converted PaginationView and LoadMoreView to use TanStack Query v5
 
 import { useState } from "react";
 import { usePokemonPage } from "../api/pokemon";
-import PokemonCard from "../components/PokemonCard";
+import PokemonCard from "./PokemonCard";
 
-export const PaginationView = () => {
+export default function PaginationView() {
   const [page, setPage] = useState(1);
   const ITEMS_PER_PAGE = 20;
 
-  const { data, isLoading, error } = usePokemonPage(page, ITEMS_PER_PAGE);
+  const { data, isLoading, error, refetch } = usePokemonPage(page, ITEMS_PER_PAGE);
 
   const getIdFromUrl = (url: string) => {
     const match = url.match(/\/pokemon\/(\d+)\//);
@@ -19,6 +18,11 @@ export const PaginationView = () => {
 
   return (
     <div>
+            {error && (
+        <div className="text-center text-red-500 mb-4">
+          {error.message} <button onClick={() => refetch()} className="underline text-blue-600">Retry</button>
+        </div>
+      )}
       {isLoading && (
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-6 mb-6">
           {Array.from({ length: ITEMS_PER_PAGE }).map((_, i) => (
@@ -32,11 +36,13 @@ export const PaginationView = () => {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-6 mb-6">
         {data?.results.map((pokemon) => {
+          /// I CANT GET  ID FROM API SO I GET IT FROM URL
           const id = getIdFromUrl(pokemon.url);
           return (
             <PokemonCard
               key={pokemon.name}
               name={pokemon.name}
+              id={Number(id)}
               imageUrl={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
             />
           );
@@ -47,7 +53,7 @@ export const PaginationView = () => {
         <button
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page === 1}
-          className="px-3 py-1 border rounded disabled:opacity-40 bg-white hover:bg-gray-100"
+          className="  px-3 py-1 border rounded-lg border-gray-200 disabled:opacity-40 bg-white hover:bg-gray-100 cursor-pointer"
         >
           Previous
         </button>
@@ -58,9 +64,9 @@ export const PaginationView = () => {
             <button
               key={p}
               onClick={() => setPage(p)}
-              className={`px-3 py-1 rounded border ${
+              className={`px-3 py-1 rounded-lg border border-gray-200 cursor-pointer ${
                 p === page
-                  ? "bg-blue-600 text-white font-bold"
+                  ? "bg-yellow-400 text-white font-bold"
                   : "bg-white hover:bg-gray-100"
               }`}
             >
@@ -71,7 +77,7 @@ export const PaginationView = () => {
         <button
           onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
           disabled={page === totalPages}
-          className="px-3 py-1 border rounded disabled:opacity-40 bg-white hover:bg-gray-100"
+          className="px-3 py-1 border rounded-lg border-gray-200 disabled:opacity-40 bg-white hover:bg-gray-100 cursor-pointer "
         >
           Next
         </button>

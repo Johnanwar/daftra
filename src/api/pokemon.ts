@@ -46,10 +46,10 @@ export function usePokemonPage(page: number, limit = 10) {
   });
 }
 
-export function usePokemonDetails(name: string) {
+export function usePokemonDetails(id: number) {
   return useQuery({
-    queryKey: ['pokemonDetails', name],
-    queryFn: () => fetcher<PokemonDetails>(`${API_BASE}/pokemon/${name}`),
+    queryKey: ['pokemonDetails', id],
+    queryFn: () => fetcher<PokemonDetails>(`${API_BASE}/pokemon/${id}`),
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 }

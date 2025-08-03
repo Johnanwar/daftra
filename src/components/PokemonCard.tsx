@@ -4,16 +4,18 @@ import { Link } from 'react-router-dom';
 type Props = {
   name: string;
   imageUrl: string;
+  id: number;
 };
 
-const PokemonCard: React.FC<Props> = ({ name, imageUrl }) => {
+const PokemonCard: React.FC<Props> = ({ name, imageUrl, id  }) => {
   return (
     <Link
-      to={`/pokemon/${name}`}
-      state={{ name, imageUrl }}
-      className="block border rounded-lg shadow-sm p-4 text-center hover:shadow-md transition"
+      to={`/pokemon/${id}`}
+      className="block  rounded-lg shadow-sm bg-white p-4 border border-gray-200 text-center hover:shadow-md transition"
     >
-      <img src={imageUrl} alt={name} className="w-20 h-20 mx-auto mb-2" />
+      <div className=" bg-gray-100">
+        <img src={imageUrl} alt={name} className="w-30 h-30 mx-auto mb-2 rounded-full" />
+      </div>
       <h2 className="capitalize font-semibold">{name}</h2>
     </Link>
   );

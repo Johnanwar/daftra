@@ -1,9 +1,9 @@
 
 import { useEffect, useState } from "react";
 import { usePokemonPage } from "../api/pokemon";
-import PokemonCard from "../components/PokemonCard";
+import PokemonCard from "./PokemonCard";
 
-export const LoadMoreView = () => {
+export default function LoadMoreView() {
   const [page, setPage] = useState(1);
   const [allData, setAllData] = useState<any[]>([]);
   const [hasMore, setHasMore] = useState(true);
@@ -34,11 +34,13 @@ export const LoadMoreView = () => {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-6 mb-6">
         {allData.map((pokemon) => {
+          /// I CANT GET  ID FROM API SO I GET IT FROM URL
           const id = getIdFromUrl(pokemon.url);
           return (
             <PokemonCard
               key={pokemon.name}
               name={pokemon.name}
+              id={Number(id)}
               imageUrl={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
             />
           );
@@ -53,7 +55,7 @@ export const LoadMoreView = () => {
         <div className="flex justify-center">
           <button
             onClick={() => setPage((p) => p + 1)}
-            className="px-6 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500 transition"
+            className="px-8 py-3 cursor-pointer rounded-lg font-medium shadow-md bg-yellow-400 text-white hover:bg-yellow-500 transition"
           >
             Load More
           </button>

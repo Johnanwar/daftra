@@ -7,11 +7,11 @@ const PokemonDetail = lazy(() => import('./pages/PokemonDetail'));
 
 function App() {
   return (
-    <div className="p-4">
+    <div >
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/pokemon/:name" element={<PokemonDetail />} />
+          <Route path="/pokemon/:id" element={<PokemonDetail />} />
         </Routes>
       </Suspense>
     </div>
