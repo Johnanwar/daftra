@@ -1,4 +1,5 @@
 import { lazy, useState } from 'react';
+import { ErrorBoundary } from '../components/ErrorBoundary';
 const PaginationView = lazy(() => import('./PaginationView').then(module => ({ default: module.PaginationView })) );
 const LoadMoreView = lazy(() => import('./LoadMoreView').then(module => ({ default: module.LoadMoreView })) );
 
@@ -36,7 +37,9 @@ const Browser = () => {
         </div>
       </div>
 
-      {mode === 'pagination' ? <PaginationView /> : <LoadMoreView />}
+      <ErrorBoundary>
+          {mode === 'pagination' ? <PaginationView /> : <LoadMoreView />}
+      </ErrorBoundary>
     </div>
   );
 };
